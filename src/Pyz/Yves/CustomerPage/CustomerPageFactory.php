@@ -9,6 +9,11 @@ use SprykerShop\Yves\CustomerPage\CustomerPageFactory as SprykerCustomerPageFact
 
 class CustomerPageFactory extends SprykerCustomerPageFactory
 {
+    public function createCustomerFormFactory()
+    {
+        return new FormFactory();
+    }
+
     public function createAntelopeTransformer(): AntelopeTransformer
     {
         return new AntelopeTransformer(
