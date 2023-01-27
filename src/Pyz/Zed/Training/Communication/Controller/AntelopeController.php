@@ -8,6 +8,7 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 
 /**
  * @method \Pyz\Zed\Training\Business\TrainingFacadeInterface getFacade()
+ * @method \Pyz\Zed\Training\Communication\TrainingCommunicationFactoryInterface getFactory()
  */
 class AntelopeController extends AbstractController
 {
@@ -24,8 +25,11 @@ class AntelopeController extends AbstractController
                 ->createAntelope($antelopeTransfer);
         }
 
+        $myConfig = $this->getFactory()->getConfig()->getKey();
+
         return $this->viewResponse([
             'antelope' => $antelopeTransfer,
+            'config' => $myConfig,
         ]);
     }
 }
