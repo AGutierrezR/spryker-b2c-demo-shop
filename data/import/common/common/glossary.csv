@@ -671,6 +671,8 @@ customer.profile.last_name,Last Name,en_US
 customer.profile.last_name,Nachname,de_DE
 customer.profile.email,Email,en_US
 customer.profile.email,E-Mail,de_DE
+customer.profile.antelope,Antelope,en_US
+customer.profile.antelope,Antelope,de_DE
 customer.profile.phone,Phone,en_US
 customer.profile.phone,Telefon,de_DE
 customer.profile.old_password,Old Password,en_US
