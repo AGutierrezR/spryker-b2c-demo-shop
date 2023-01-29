@@ -1,0 +1,13 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    helloWorld: _view.helloWorld
+}%}
+
+{% block content %}
+    <div class="row">
+        <div class="small-12 columns">
+            <h2>{{ data.helloWorld }}</h2>
+        </div>
+    </div>
+{% endblock %}
