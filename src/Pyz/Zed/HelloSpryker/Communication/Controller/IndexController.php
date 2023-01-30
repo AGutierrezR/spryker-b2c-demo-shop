@@ -5,6 +5,9 @@ namespace Pyz\Zed\HelloSpryker\Communication\Controller;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @method \Pyz\Zed\HelloSpryker\Business\HelloSprykerFacadeInterface getFacade()
+ */
 class IndexController extends AbstractController
 {
     /**
@@ -14,6 +17,9 @@ class IndexController extends AbstractController
      */
     public function indexAction(Request $request)
     {
-        return ['string' => 'Hello Spryker!'];
+        $originalString = 'Hello Spryker!';
+        $reversedString = $this->getFacade()->reverseString($originalString);
+
+        return ['string' => $reversedString];
     }
 }
