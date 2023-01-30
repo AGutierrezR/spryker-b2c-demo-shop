@@ -1,6 +1,6 @@
 <?php
 
-namespace Pyz\Zed\HelloSpryker\Business\Reverser;
+namespace Pyz\Zed\StringReverser\Business\Reverser;
 
 use Generated\Shared\Transfer\HelloSprykerTransfer;
 
