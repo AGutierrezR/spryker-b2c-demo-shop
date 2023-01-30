@@ -2,6 +2,7 @@
 
 namespace Pyz\Zed\HelloSpryker\Communication\Controller;
 
+use Generated\Shared\Transfer\HelloSprykerTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -17,9 +18,11 @@ class IndexController extends AbstractController
      */
     public function indexAction(Request $request)
     {
-        $originalString = 'Hello Spryker!';
-        $reversedString = $this->getFacade()->reverseString($originalString);
+        $helloSprykerTransfer = new HelloSprykerTransfer();
+        $helloSprykerTransfer->setOriginalString('Hello Spryker!');
 
-        return ['string' => $reversedString];
+        $helloSprykerTransfer = $this->getFacade()->reverseString($helloSprykerTransfer);
+
+        return ['string' => $helloSprykerTransfer->getReversedString()];
     }
 }
