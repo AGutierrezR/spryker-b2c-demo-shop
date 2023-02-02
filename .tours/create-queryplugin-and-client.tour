@@ -1,0 +1,121 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Create QueryPlugin and Client",
+  "steps": [
+    {
+      "file": "src/Pyz/Client/PersonalizedProduct/Plugin/Elasticsearch/Query/PersonalizedProductQueryPlugin.php",
+      "description": "Primero se crea la clase *QueryPlugin que servira para formular las queries de el SearchClient",
+      "line": 16
+    },
+    {
+      "file": "src/Pyz/Client/PersonalizedProduct/Plugin/Elasticsearch/Query/PersonalizedProductQueryPlugin.php",
+      "description": "Se asigna la propiedad `limit` para ser usada en el query que se va a formular",
+      "line": 35
+    },
+    {
+      "file": "src/Pyz/Client/PersonalizedProduct/Plugin/Elasticsearch/Query/PersonalizedProductQueryPlugin.php",
+      "description": "El método `getSearchQuery` proviene de la interfaz `QueryInterface` y es el encargado de tener la implementación que formula la query.",
+      "line": 41,
+      "selection": {
+        "start": {
+          "line": 16,
+          "character": 49
+        },
+        "end": {
+          "line": 16,
+          "character": 63
+        }
+      }
+    },
+    {
+      "file": "src/Pyz/Client/PersonalizedProduct/Plugin/Elasticsearch/Query/PersonalizedProductQueryPlugin.php",
+      "description": "Se usa el `session_id` del customer y se usa con el random score de Elasticsearch, estos valores podrian cambiar de ser necesario",
+      "line": 46
+    },
+    {
+      "file": "src/Pyz/Client/PersonalizedProduct/Plugin/Elasticsearch/Query/PersonalizedProductQueryPlugin.php",
+      "description": "Aqui se usa el `limit` para establecer el tamaño de los resultados que vendran en la respuesta",
+      "line": 55
+    },
+    {
+      "file": "src/Pyz/Client/PersonalizedProduct/Plugin/Elasticsearch/Query/PersonalizedProductQueryPlugin.php",
+      "description": "Este método proviene de `SearchContextAwareQueryInterface`",
+      "line": 68
+    },
+    {
+      "file": "src/Pyz/Client/PersonalizedProduct/Plugin/Elasticsearch/Query/PersonalizedProductQueryPlugin.php",
+      "description": "Este método proviene de `SearchContextAwareQueryInterface`",
+      "line": 84,
+      "selection": {
+        "start": {
+          "line": 16,
+          "character": 65
+        },
+        "end": {
+          "line": 16,
+          "character": 97
+        }
+      }
+    },
+    {
+      "file": "src/Pyz/Client/PersonalizedProduct/PersonalizedProductDependencyProvider.php",
+      "description": "Ya que para usar el QueryPlugin se requiere de SearchClient y del formatter, tenemos que inyectar esas dependencias en este modulo",
+      "line": 9
+    },
+    {
+      "file": "src/Pyz/Client/PersonalizedProduct/PersonalizedProductDependencyProvider.php",
+      "description": "Se agrega el SearchClient usando el `getLocator()`",
+      "line": 35
+    },
+    {
+      "file": "src/Pyz/Client/PersonalizedProduct/PersonalizedProductDependencyProvider.php",
+      "description": "Se agrega el formatter en esta implementación",
+      "line": 45
+    },
+    {
+      "file": "src/Pyz/Client/PersonalizedProduct/PersonalizedProductDependencyProvider.php",
+      "description": "El método `provideServiceLayerDependencies` se encargara de inyectar las dependencias necesarias",
+      "line": 19,
+      "selection": {
+        "start": {
+          "line": 19,
+          "character": 21
+        },
+        "end": {
+          "line": 19,
+          "character": 52
+        }
+      }
+    },
+    {
+      "file": "src/Pyz/Client/PersonalizedProduct/PersonalizedProductFactory.php",
+      "description": "Se crea el Factory para:\n- crear instancias de QueryPlugin y poder crear la query\n- crear instancias del formatter\n- crear instancias del SearchClient",
+      "line": 8
+    },
+    {
+      "file": "src/Pyz/Client/PersonalizedProduct/PersonalizedProductClientInterface.php",
+      "description": "Se crea la interface del Client para ser usada de manera interna y externa",
+      "line": 5
+    },
+    {
+      "file": "src/Pyz/Client/PersonalizedProduct/PersonalizedProductClient.php",
+      "description": "Se crea el Client que sera el punto de acceso para realizar las queries y obtener los productos",
+      "line": 10
+    },
+    {
+      "file": "src/Pyz/Yves/PersonalizedProduct/Controller/IndexController.php",
+      "description": "Se obtiene el Client como Facade de todo la logica para realizar la query usando el método `getPersonalizedProduct`, este método realizar al peticion al SearchClient con el query y el formatter y recibe la respuesta",
+      "line": 21
+    },
+    {
+      "file": "src/Pyz/Yves/PersonalizedProduct/Controller/IndexController.php",
+      "description": "Enviamos la respuesta como `data` del view",
+      "line": 24
+    },
+    {
+      "file": "src/Pyz/Yves/PersonalizedProduct/Theme/default/views/index/index.twig",
+      "description": "Usamos la molecula `product-card` la cual recibe los parametros por medio de `data`",
+      "line": 11
+    }
+  ]
+}
