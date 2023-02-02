@@ -1,0 +1,66 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Create personalized product route and view",
+  "steps": [
+    {
+      "file": "src/Pyz/Yves/PersonalizedProduct/Plugin/Router/PersonalizedProductRouteProviderPlugin.php",
+      "description": "Este método construye una ruta, le agrega atributos y la agrega a la colección de rutas.",
+      "line": 34,
+      "selection": {
+        "start": {
+          "line": 35,
+          "character": 1
+        },
+        "end": {
+          "line": 36,
+          "character": 1
+        }
+      }
+    },
+    {
+      "file": "src/Pyz/Yves/PersonalizedProduct/Controller/IndexController.php",
+      "description": "Crea el controlador de la vista",
+      "line": 8
+    },
+    {
+      "file": "src/Pyz/Yves/PersonalizedProduct/Controller/IndexController.php",
+      "description": "El método `indexAction` que se va a relacionar con el `/views/index/index.twig` template",
+      "line": 16
+    },
+    {
+      "file": "src/Pyz/Yves/PersonalizedProduct/Controller/IndexController.php",
+      "description": "Regresa una vista sin `data` ni `widgetPlugins` solo indica al `template` ",
+      "line": 18
+    },
+    {
+      "file": "src/Pyz/Yves/PersonalizedProduct/Plugin/Router/PersonalizedProductRouteProviderPlugin.php",
+      "description": "Construye la ruta con: \n`path:'/personalized-product/{limit}'` \n`moduleName:'PersonalizedProduct'` \n`controllerName:'PersonalizedProduct'`\n`actionName: 'indexAction'` ",
+      "line": 36
+    },
+    {
+      "file": "src/Pyz/Yves/PersonalizedProduct/Plugin/Router/PersonalizedProductRouteProviderPlugin.php",
+      "description": "Agrega un valor por defecto para el `limit` agregado en la ruta, en este caso el valor es `10`",
+      "line": 43
+    },
+    {
+      "file": "src/Pyz/Yves/PersonalizedProduct/Plugin/Router/PersonalizedProductRouteProviderPlugin.php",
+      "description": "Agrega el requeriemiento de que el valor introducido sea un valor numerico positivo",
+      "line": 44
+    },
+    {
+      "file": "src/Pyz/Yves/PersonalizedProduct/Plugin/Router/PersonalizedProductRouteProviderPlugin.php",
+      "description": "Agrega la ruta a el `routeCollection` que se envia como parametro de esta función.",
+      "line": 46
+    },
+    {
+      "file": "src/Pyz/Yves/Router/RouterDependencyProvider.php",
+      "description": "Import the PersonalizedProductRouteProviderPlugin",
+      "line": 58
+    },
+    {
+      "file": "src/Pyz/Yves/Router/RouterDependencyProvider.php",
+      "description": "Register it into the `getRouteProvider()` method",
+      "line": 120
+    }
+  ]
+}
