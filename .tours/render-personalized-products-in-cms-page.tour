@@ -1,0 +1,21 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Render personalized products in CMS Page",
+  "steps": [
+    {
+      "file": "src/Pyz/Shared/Cms/Theme/default/templates/my-offers/my-offers.twig",
+      "description": "El método render() se le pasa un `path` este es el mismo que hemos declarado como constante en `PersonalizedProductRouteProviderPlugin.php` en la propiedad `PERSONALIZED_PRODUCT_INDEX`",
+      "line": 17,
+      "selection": {
+        "start": {
+          "line": 17,
+          "character": 24
+        },
+        "end": {
+          "line": 17,
+          "character": 52
+        }
+      }
+    }
+  ]
+}

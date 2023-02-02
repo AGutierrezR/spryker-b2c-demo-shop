@@ -13,8 +13,7 @@
 {% endblock %}
 
 {% block content %}
-    <!-- CMS_PLACEHOLDER : "content" -->
     <div class="box">
-        {{ spyCms('content') | raw }}
+        {{ render(path('personalized-product-index', {'limit': 12})) }}
     </div>
 {% endblock %}
