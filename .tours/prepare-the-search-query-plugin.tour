@@ -1,0 +1,81 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Prepare the search query plugin",
+  "steps": [
+    {
+      "file": "src/Pyz/Client/Catalog/Plugin/Elasticsearch/QueryExpander/AttributeCartBasedBoostingQueryExpanderPlugin.php",
+      "description": "Este plugin sirve para extender y mejorar funcionalidades, leera del carrito y ordenara los elementos del catalogo acorde a el atributo de color del elemento que sea agregado al carrito",
+      "line": 21
+    },
+    {
+      "file": "src/Pyz/Client/Catalog/CatalogDependencyProvider.php",
+      "description": "Se agrega el método `provideServiceLayerDependencies` para extenderlo y poder agregar mas dependencias",
+      "line": 59,
+      "selection": {
+        "start": {
+          "line": 59,
+          "character": 21
+        },
+        "end": {
+          "line": 59,
+          "character": 52
+        }
+      }
+    },
+    {
+      "file": "src/Pyz/Client/Catalog/CatalogDependencyProvider.php",
+      "description": "Se ejecuta el método `provideServiceLayerDependencies` del padre, asi se ejecutan las dependencias ya existentes",
+      "line": 61
+    },
+    {
+      "file": "src/Pyz/Client/Catalog/CatalogDependencyProvider.php",
+      "description": "Se agrega el CartClient",
+      "line": 63
+    },
+    {
+      "file": "src/Pyz/Client/Catalog/CatalogDependencyProvider.php",
+      "description": "Se agrega el ProductoStorageClient",
+      "line": 64
+    },
+    {
+      "file": "src/Pyz/Client/Catalog/CatalogDependencyProvider.php",
+      "description": "Esta es la implementación que recupera el CartClient",
+      "line": 77
+    },
+    {
+      "file": "src/Pyz/Client/Catalog/CatalogDependencyProvider.php",
+      "description": "Esta es la implementación que recupera el ProductStorageClient\n\n",
+      "line": 91
+    },
+    {
+      "file": "src/Pyz/Client/Catalog/CatalogFactory.php",
+      "description": "Se crea el Factory para crear instancias de lo que necesitemos, en este caso, CartClient y ProductoStorageClient",
+      "line": 7
+    },
+    {
+      "file": "src/Pyz/Client/Catalog/CatalogFactory.php",
+      "description": "Se recupera la dependencia de CartClient",
+      "line": 16
+    },
+    {
+      "file": "src/Pyz/Client/Catalog/CatalogFactory.php",
+      "description": "Se recupera la dependencia de ProductStorageClient",
+      "line": 26
+    },
+    {
+      "file": "src/Pyz/Client/Catalog/CatalogDependencyProvider.php",
+      "description": "Se agrega el `AttributeCartBasedBoostingQueryExpanderPlugin` en los CatalogSearchSearchQueryExpanderPlugins().\n\nSe ha eliminado el `new SortedCategoryQueryExpanderPlugin(CategoryFacetConfigTransferBuilderPlugin::PARAMETER_NAME),`",
+      "line": 142,
+      "selection": {
+        "start": {
+          "line": 142,
+          "character": 17
+        },
+        "end": {
+          "line": 142,
+          "character": 62
+        }
+      }
+    }
+  ]
+}
