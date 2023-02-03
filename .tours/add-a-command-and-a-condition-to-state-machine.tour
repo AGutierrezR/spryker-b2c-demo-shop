@@ -1,0 +1,66 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Add a Command and a Condition to State Machine",
+  "steps": [
+    {
+      "file": "config/Zed/oms/Demo01.xml",
+      "description": "Se agrega un command, este comando se llamara `Demo/Pay`\n\nLos comandos son usados para implementar cualquier funcionalidad usada en el proceso. En un escenario real, este comando llamaria al provider de payment para autorizar el pago. En Spryker un commando es agregado a un evento.",
+      "line": 65
+    },
+    {
+      "file": "src/Pyz/Zed/Oms/OmsDependencyProvider.php",
+      "description": "Se importa el comando en el `OmsDependencyProvider`",
+      "line": 11
+    },
+    {
+      "file": "src/Pyz/Zed/Oms/OmsDependencyProvider.php",
+      "description": "Y se agrega a la coleccion de comandos, este método `add` tiene dos parametros: La clase que tiene la implementación del comando (`PayCommand`), y el nombre del comando (`Demo/Pay`)",
+      "line": 98
+    },
+    {
+      "file": "config/Zed/oms/Demo01.xml",
+      "description": "Se agrega un nuevo estado para que sea usado como \"else\" en uan transición",
+      "line": 12
+    },
+    {
+      "file": "config/Zed/oms/Demo01.xml",
+      "description": "En esta transición colocaremos un condición llamada `Demo//IsAuthorized`",
+      "line": 21
+    },
+    {
+      "file": "config/Zed/oms/Demo01.xml",
+      "description": "Se agrega esta nueva transición que va de new a unauthorized.\n\nEl motor del state machine reconoce a donde moverse usando el event name (en este caso es `pay`) en este caso la transición `new`->`paid` y `new`->`unauthorized` usan el mismo nombre de evento con una `condition` en una de las transiciones (en este caso la de `new`->`paid` la tiene)\n\nEl machine va examinar la condición y si esta devuelve `true` la movera a `paid` y si no la movera a `unauthorized`",
+      "line": 27
+    },
+    {
+      "file": "src/Pyz/Zed/Oms/Communication/Plugin/Condition/Demo/IsAuthorizedCondition.php",
+      "description": "Creamos la clase que se encarga de realizar la implementación de autorizacion, esta clase extiende de `AbstractCondition` e implementa `ConditionInterface`",
+      "line": 9
+    },
+    {
+      "file": "src/Pyz/Zed/Oms/Communication/Plugin/Condition/Demo/IsAuthorizedCondition.php",
+      "description": "El método `check` tendra al implementación que devolvera `true` o `false`.",
+      "line": 16
+    },
+    {
+      "file": "src/Pyz/Zed/Oms/OmsDependencyProvider.php",
+      "description": "Se importa la clase `IsAuthorizedCondition`",
+      "line": 12
+    },
+    {
+      "file": "src/Pyz/Zed/Oms/OmsDependencyProvider.php",
+      "description": "Y se agrega a la coleccion de condiciones, este metodo `add` recibe dos parametros: la clase que tiene la implementacion (`IsAuthorizedCondition`) y el nombre de la condición `Demo/IsAuthorized`",
+      "line": 116
+    },
+    {
+      "file": "src/Pyz/Zed/Oms/Communication/Plugin/Command/Demo/PayCommand.php",
+      "description": "Se crea una clase para el comando `Demo/Pay` el cual extiende de `AbstractCommand` e implementa `CommandbyOrderInterface`",
+      "line": 10
+    },
+    {
+      "file": "src/Pyz/Zed/Oms/Communication/Plugin/Command/Demo/PayCommand.php",
+      "description": "Debe tener un método `run` que tendra la implentación del comando que se va a ejecutar",
+      "line": 24
+    }
+  ]
+}
