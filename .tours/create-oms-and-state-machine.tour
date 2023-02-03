@@ -1,0 +1,81 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Create OMS and State Machine",
+  "steps": [
+    {
+      "file": "config/Zed/oms/Demo01.xml",
+      "description": "Se crea el archivo para el OMS",
+      "line": 1
+    },
+    {
+      "file": "config/Shared/common/config_oms-development.php",
+      "description": "Se registra en el Active Processes del config",
+      "line": 44
+    },
+    {
+      "file": "config/Zed/oms/Demo01.xml",
+      "description": "Se crea un proceso y se le da un nombre en este caso `Demo01`",
+      "line": 8
+    },
+    {
+      "file": "config/Zed/oms/Demo01.xml",
+      "description": "Se declaran los estados que va a tener este OMS",
+      "line": 9
+    },
+    {
+      "file": "config/Zed/oms/Demo01.xml",
+      "description": "Los estados se declaran dentro de una etiqueta `<status>`",
+      "line": 9
+    },
+    {
+      "file": "config/Zed/oms/Demo01.xml",
+      "description": "El estado solo necesita tener un `name`",
+      "line": 10
+    },
+    {
+      "file": "config/Zed/oms/Demo01.xml",
+      "description": "Las transiciones de un estado a otro se declaran dentro de la etiqueta `<transitions>`",
+      "line": 18
+    },
+    {
+      "file": "config/Zed/oms/Demo01.xml",
+      "description": "La etiqueta `<source>` indica desde que estado inicia esta transición. El contenido de la etiqueta debe ser el `name` del state del que queremos partir",
+      "line": 20
+    },
+    {
+      "file": "config/Zed/oms/Demo01.xml",
+      "description": "Event es el evento que ejecutara la transición. El contenido de la etiqueta debe ser el `name` del event que queremos que inicie la transición",
+      "line": 22
+    },
+    {
+      "file": "config/Zed/oms/Demo01.xml",
+      "description": "Los eventos se declaran dentro de la etiqueta `<events>`",
+      "line": 56
+    },
+    {
+      "file": "config/Zed/oms/Demo01.xml",
+      "description": "Cada evento va en una etiqueta `<event>` y debe tener un nombre y el trigger que lo ejecuta. En este caso, este evento ocurreria en `onEnter`",
+      "line": 57
+    },
+    {
+      "file": "config/Zed/oms/Demo01.xml",
+      "description": "Y este ocurre de manera `manual`, lo que significa que debemos presionar algun boton que inicie este proceso.",
+      "line": 58
+    },
+    {
+      "file": "config/Zed/oms/Demo01.xml",
+      "description": "La etiqueta `<target>` indica el punto final de esta transición. El contenido de la etiqueta debe ser el `name` del state al que queremos ir",
+      "line": 21,
+      "selection": {
+        "start": {
+          "line": 1,
+          "character": 66
+        },
+        "end": {
+          "line": 1,
+          "character": 141
+        }
+      }
+    }
+  ]
+}
