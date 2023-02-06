@@ -1,0 +1,41 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Different Stores, Different Logic",
+  "steps": [
+    {
+      "file": "src/Pyz/Zed/Application/Communication/Controller/IndexController.php",
+      "description": "Se ha creado un IndexController para extender el index page del Back Office, este extiende la funcionalidad del `IndexController` del Core",
+      "line": 7
+    },
+    {
+      "file": "src/Pyz/Zed/Application/Communication/Controller/IndexController.php",
+      "description": "El action que va relacionado con la vista index, este devuelve un `viewResponse` con la propiedad `message`",
+      "line": 12
+    },
+    {
+      "file": "src/Pyz/Zed/Application/Presentation/Index/index.twig",
+      "description": "Se crea un `index.twig` para mostrar la nueva vista, ya que el del core no muestra ningun tipo de propiedad",
+      "line": 1
+    },
+    {
+      "file": "src/Pyz/Zed/Application/Presentation/Index/index.twig",
+      "description": "Aqui se presenta el atributo `message` en el bloque `content`. \n\nSe tendra que ejecutar le commando: `cache:empty-all` para que la vista se actualice, luego se visita la dirección: http://backoffice.de.spryker.local/ y se debe ver el \"Hello DE Store!\"",
+      "line": 5
+    },
+    {
+      "file": "src/Pyz/Zed/ApplicationAT/Communication/Controller/IndexController.php",
+      "description": "Se crea una Store para AT para ser mostrada en el index de esta store AT",
+      "line": 3
+    },
+    {
+      "file": "src/Pyz/Zed/ApplicationAT/Communication/Controller/IndexController.php",
+      "description": "Se extiende desde el Core y no del IndexController que acabamos de crear en el proyecto (**se puede extender del que acabamos de crear en el caso que tenga logica que necesitemos**)",
+      "line": 7
+    },
+    {
+      "file": "src/Pyz/Zed/ApplicationAT/Communication/Controller/IndexController.php",
+      "description": "Se cambia el `message` para mostrar uno diferente al acceder a http://backoffice.at.spryker.local/, no es necesario crear otro `index.twig` ya que se usara el mismo que esta en el proyecto (el que acabamos de crear)",
+      "line": 15
+    }
+  ]
+}
