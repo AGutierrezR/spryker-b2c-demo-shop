@@ -1,0 +1,131 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Create TDD For StringReverser",
+  "steps": [
+    {
+      "file": "tests/PyzTest/Zed/StringReverser/codeception.yml",
+      "description": "Se crea este archivo para la configuracion del test de este modulo StringReverser.\n\nLuego se ejecuta el comando `docker/sdk testing codecept run -c tests/PyzTest/Zed/StringReverser` el cual generara el archivo  `tests/PyzTest/Zed/StringReverser/_support/_generated/StringReverserBusinessTesterActions.php`",
+      "line": 1
+    },
+    {
+      "file": "tests/_data/string_reverser.databuilder.xml",
+      "description": "Para poder crear un Transfer Object para el testing creamos un DataBuilder, este archivo xml es similar a un DTO pero funciona para testing, por lo que usan data fakers para generar data aleatoria.\n\nLuego decrear este archivo se ejecuta el comando `docker/sdk console transfer:databuilder:generate`",
+      "line": 1
+    },
+    {
+      "file": "src/Pyz/Shared/StringReverser/Transfer/string_reverser.transfer.xml",
+      "description": "Los Data Builders regresan un Transfer Object del mismo tipo que el Data Builder, por lo que se necesita un Transfer Object llamado StringReverser para que el data builder funciona. \n\nLuego se ejecuta el comando `docker/sdk console transfer:generate`",
+      "line": 1
+    },
+    {
+      "file": "tests/PyzTest/Zed/StringReverser/Business/StringReverserFacadeTest.php",
+      "description": "Ya teniendo el DataBuilder de este modulo crearemos el `StringReverseFacadeTest.php` se sera donde especificaremos cada test",
+      "line": 1
+    },
+    {
+      "file": "tests/PyzTest/Zed/StringReverser/Business/StringReverserFacadeTest.php",
+      "description": "Importamos el DataBuilder",
+      "line": 6
+    },
+    {
+      "file": "tests/PyzTest/Zed/StringReverser/Business/StringReverserFacadeTest.php",
+      "description": "Creamos la clase `StringReverserFacadeTest` la cual extiende de `Unit`",
+      "line": 19
+    },
+    {
+      "file": "tests/PyzTest/Zed/StringReverser/Business/StringReverserFacadeTest.php",
+      "description": "La propiedad `$tester` es un BusinessTester que tendra un Locator para encontrar el modulo y asi obtener la Facade",
+      "line": 24
+    },
+    {
+      "file": "tests/PyzTest/Zed/StringReverser/Business/StringReverserFacadeTest.php",
+      "description": "Se crea un Transfer usando el DataBuilder y con el método `build()` construimos ese objeto",
+      "line": 32
+    },
+    {
+      "file": "tests/PyzTest/Zed/StringReverser/Business/StringReverserFacadeTest.php",
+      "description": "Usando el `tester` usamos el método `getLocator()` para buscar el modulo String Reverser y poder tener acceso a Facade",
+      "line": 37
+    },
+    {
+      "file": "tests/PyzTest/Zed/StringReverser/Business/StringReverserFacadeTest.php",
+      "description": "Con el Facade accedemos al método `reverseString` y le pasamos el Transfer que creamos con el DataBuilder",
+      "line": 38
+    },
+    {
+      "file": "tests/PyzTest/Zed/StringReverser/Business/StringReverserFacadeTest.php",
+      "description": "Realizamos el Assert para confirmar que todo funciona correctamente!\n\nLuego ejecutamos el test con el comando `docker/sdk testing codecept run -c tests/PyzTest/Zed/StringReverser`. El cual fallara por falta el Config y DependencyProvider de StringReverser",
+      "line": 41
+    },
+    {
+      "file": "src/Pyz/Zed/StringReverser/StringReverserConfig.php",
+      "description": "El archivo Config se crea como requisito para realizar los test a este modulo",
+      "line": 1,
+      "selection": {
+        "start": {
+          "line": 1,
+          "character": 1
+        },
+        "end": {
+          "line": 1,
+          "character": 78
+        }
+      }
+    },
+    {
+      "file": "src/Pyz/Zed/StringReverser/StringReverserDependencyProvider.php",
+      "description": "Al igual que el DependencyProvider, sin estos el test no podra ejecutarse correctamente",
+      "line": 1
+    },
+    {
+      "file": "src/Pyz/Zed/StringReverser/Business/Reverser/StringReverserInterface.php",
+      "description": "Se ha cambiado el HelloSprykerTransfer por el Transfer del modulo",
+      "line": 5,
+      "selection": {
+        "start": {
+          "line": 1,
+          "character": 1
+        },
+        "end": {
+          "line": 1,
+          "character": 66
+        }
+      }
+    },
+    {
+      "file": "src/Pyz/Zed/StringReverser/Business/Reverser/StringReverserInterface.php",
+      "description": "Tambien se debe cambiar el método en si",
+      "line": 14
+    },
+    {
+      "file": "src/Pyz/Zed/StringReverser/Business/Reverser/StringReverser.php",
+      "description": "Modificamos este metodo tambien, cambiando el HelloSprykerTransfer por el StringReverserTransfer",
+      "line": 14
+    },
+    {
+      "file": "src/Pyz/Zed/StringReverser/Business/StringReverserFacadeInterface.php",
+      "description": "Lo mismo aca",
+      "line": 9
+    },
+    {
+      "file": "src/Pyz/Zed/StringReverser/Business/StringReverserFacade.php",
+      "description": "Y aca",
+      "line": 13
+    },
+    {
+      "file": "src/Pyz/Zed/HelloSpryker/Business/HelloSprykerFacade.php",
+      "description": "Por ultimo, realizamos una ligera modificación en este método en el modulo HelloSpryker, ya que este recibe un HelloSprykerTransfer",
+      "line": 17
+    },
+    {
+      "file": "src/Pyz/Zed/HelloSpryker/Business/HelloSprykerFacade.php",
+      "description": "Aqui lo convertimos en un StringReverserTransfer con el metodo toArray-fromArray y asi poderlo enviar al modulo StringReverser",
+      "line": 19
+    },
+    {
+      "file": "src/Pyz/Zed/HelloSpryker/Business/HelloSprykerFacade.php",
+      "description": "Por ultimo lo volvemos a convertir en HelloSprykerTransfer con el mismo patron de toArray-fromArray",
+      "line": 21
+    }
+  ]
+}

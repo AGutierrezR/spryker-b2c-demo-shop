@@ -3,6 +3,8 @@
 namespace Pyz\Zed\HelloSpryker\Business;
 
 use Generated\Shared\Transfer\HelloSprykerTransfer;
+use Generated\Shared\Transfer\StringReverserTransfer;
+use Pyz\Zed\StringReverser\Business\Reverser\StringReverser;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
@@ -12,9 +14,11 @@ class HelloSprykerFacade extends AbstractFacade implements HelloSprykerFacadeInt
 {
     public function reverseString(HelloSprykerTransfer $helloSprykerTransfer): HelloSprykerTransfer
     {
-        return $this->getFactory()
+        $stringReverserTransfer = $this->getFactory()
             ->createStringReverser()
-            ->reverseString($helloSprykerTransfer);
+            ->reverseString((new StringReverserTransfer())->fromArray($helloSprykerTransfer->toArray(), true));
+
+        return $helloSprykerTransfer->fromArray($stringReverserTransfer->toArray(), true);
     }
 
     public function createHelloSprykerEntity(HelloSprykerTransfer $helloSprykerTransfer): HelloSprykerTransfer
