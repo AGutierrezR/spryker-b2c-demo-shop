@@ -1,0 +1,86 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Task: Persists and fetch antelopes across module layers and services - Part 6",
+  "steps": [
+    {
+      "file": "src/Pyz/Yves/TrainingPage/Theme/default/views/antelope/get.twig",
+      "description": "En este caso, comenzamos por el template que va a mostrar la información. La diferencia con Zed es que el archivo de plantilla debe estar en la carpeta `Theme` con la sub carpeta `default`",
+      "line": 1
+    },
+    {
+      "file": "src/Pyz/Yves/TrainingPage/Theme/default/views/antelope/get.twig",
+      "description": "En el caso de las template de Yves, se tiene que crear una sección dedicada para `data` para definir la data del template, esta data viene del objecto `_view`",
+      "line": 3
+    },
+    {
+      "file": "src/Pyz/Yves/TrainingPage/TrainingPageDependencyProvider.php",
+      "description": "Ya que para el TrainingPage vamos a tener que usar el Client que hemos creado, debemos inyectarlos por medio del DependencyProvider",
+      "line": 8
+    },
+    {
+      "file": "src/Pyz/Yves/TrainingPage/TrainingPageDependencyProvider.php",
+      "description": "Aca usamos el `getLocator()` para acceder al modulo Training y acceder al Client",
+      "line": 22
+    },
+    {
+      "file": "src/Pyz/Yves/TrainingPage/TrainingPageDependencyProvider.php",
+      "description": "Y con el método `provideDependecies` podemos agregar las dependencias",
+      "line": 12
+    },
+    {
+      "file": "src/Pyz/Yves/TrainingPage/TrainingPageFactory.php",
+      "description": "Usamos el Factory para obtener la instancia de el TrainingClient",
+      "line": 8
+    },
+    {
+      "file": "src/Pyz/Yves/TrainingPage/TrainingPageFactory.php",
+      "description": "Usando la constante `TrainingPageDependencyProvider::CLIENT_TRAINING`",
+      "line": 12
+    },
+    {
+      "file": "src/Pyz/Yves/TrainingPage/Controller/AntelopeController.php",
+      "description": "Craemos el Controller de la vista que vamos a crear",
+      "line": 11
+    },
+    {
+      "file": "src/Pyz/Yves/TrainingPage/Controller/AntelopeController.php",
+      "description": "El método `getAction` es para la vista `get`",
+      "line": 13
+    },
+    {
+      "file": "src/Pyz/Yves/TrainingPage/Controller/AntelopeController.php",
+      "description": "Usamos el factory para acceder al TrainingClient y usar su método `findAntelope()` y acceder al BackendGateway",
+      "line": 18
+    },
+    {
+      "file": "src/Pyz/Yves/TrainingPage/Plugin/Router/TrainingPageRouteProviderPlugin.php",
+      "description": "Ya que las rutas no se crean automaticamente como en Zed, creamos el RouteProviderPlugin, para definir las rutas",
+      "line": 8
+    },
+    {
+      "file": "src/Pyz/Yves/TrainingPage/Plugin/Router/TrainingPageRouteProviderPlugin.php",
+      "description": "Creamos una constante para idenficar la ruta en el routeCollection",
+      "line": 10
+    },
+    {
+      "file": "src/Pyz/Yves/TrainingPage/Plugin/Router/TrainingPageRouteProviderPlugin.php",
+      "description": "Con este método construimos la ruta, configuramos el método http y lo agregamos al routeCollection",
+      "line": 19
+    },
+    {
+      "file": "src/Pyz/Yves/TrainingPage/Plugin/Router/TrainingPageRouteProviderPlugin.php",
+      "description": "Y el método `addRoutes` es donde se debe ejecutar el código que va a agregar las rutas",
+      "line": 12
+    },
+    {
+      "file": "src/Pyz/Yves/Router/RouterDependencyProvider.php",
+      "description": "Agregamos el RouteProviderPlugin que hemos creados",
+      "line": 55
+    },
+    {
+      "file": "src/Pyz/Yves/Router/RouterDependencyProvider.php",
+      "description": "Y lo agregamos en el método `getRouteProvider` y asi ya tenemos la ruta configurada para Yves",
+      "line": 114
+    }
+  ]
+}
