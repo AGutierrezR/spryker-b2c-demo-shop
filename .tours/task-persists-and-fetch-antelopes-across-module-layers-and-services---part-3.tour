@@ -1,0 +1,76 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Task: Persists and fetch antelopes across module layers and services - Part 3",
+  "steps": [
+    {
+      "file": "src/Pyz/Shared/Training/Transfer/antelope.transfer.xml",
+      "description": "Cuando se quiere pasar data desde Zed a Yves, es muy util envolver el DTO en un `*ResponseTransfer` el cual puede enriquecerse con información adicional. En este caso se agrego si la petición fue completada o no (la propiedad `isSuccessfull`)\n\nLuego de esto ejecutamos el comando `docker/sdk console transfer:generate` para generar el DTO\n",
+      "line": 15
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Business/Writer/AntelopeWriter.php",
+      "description": "Para tener una estructura solida se separa el reading y el writing en clases diferentes. Esta clase usara el EntityManager por medio de inyección de depedencias",
+      "line": 8
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Business/Writer/AntelopeWriter.php",
+      "description": "Al construir esta clase le pasaremos una instancia de el Entity Manager que creamos en el Persistence Layer",
+      "line": 15
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Business/Writer/AntelopeWriter.php",
+      "description": "Este método usara el método `createAntelope` del Entity Manager que le pasemos",
+      "line": 20
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Business/Reader/AntelopeReader.php",
+      "description": "El Reader usara el Repository para leer de la base de datos ",
+      "line": 9
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Business/Reader/AntelopeReader.php",
+      "description": "Al igual que el Writer, este recibe el Repository por dependency injection.",
+      "line": 16
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Business/Reader/AntelopeReader.php",
+      "description": "Este método de lectura es un poco mas elaborado ya que lee la base de datos y aparte crea el ResponseTranser para regresarlo al frontend",
+      "line": 21
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Business/TrainingBusinessFactory.php",
+      "description": "En el BusinessFactory se crearan las instancias del Reader y el Writer",
+      "line": 13
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Business/TrainingBusinessFactory.php",
+      "description": "Aqui se injecta una instancia del Entity Manager en el Writer.\n\nEl BusinessFactory tiene los metodos `getEntityManager()` y `getRepository()` para obtener el Entity Manager y el Repository de la capa Persistance del modulo",
+      "line": 18
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Business/TrainingBusinessFactory.php",
+      "description": "Aqui se injecta una instancia del Repository en el Reader",
+      "line": 25,
+      "selection": {
+        "start": {
+          "line": 1,
+          "character": 1
+        },
+        "end": {
+          "line": 1,
+          "character": 58
+        }
+      }
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Business/TrainingFacadeInterface.php",
+      "description": "Ya teniendo todas las implementaciónes, crearemos la interface de el Facade, para poder definir los métodos que tendra",
+      "line": 9
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Business/TrainingFacade.php",
+      "description": "Se crea el Facade que sera lo que se expone fuera",
+      "line": 13
+    }
+  ]
+}
