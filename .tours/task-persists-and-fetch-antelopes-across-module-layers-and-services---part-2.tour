@@ -1,0 +1,86 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Task: Persists and fetch antelopes across module layers and services - Part 2",
+  "steps": [
+    {
+      "file": "src/Pyz/Shared/Training/Transfer/antelope.transfer.xml",
+      "description": "Es una buena practica no usar Simple Types directamente para datos pedidos desde la Persistence Layer. Por esta razon se crea un `*CriteriaTransfer` que puede tener los criterios de nuestra peticiones",
+      "line": 11
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Persistence/TrainingPersistenceFactory.php",
+      "description": "Es buena practica en Spryker, inicializar las queries en el Factory, por lo que se ha creado el archivo `TrainingPersistenceFactory.php` para realizar esta tarea.",
+      "line": 8
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Persistence/TrainingPersistenceFactory.php",
+      "description": "Creamos el metodo `createAntelopeQuery` que usara el `PyzAntelopeQuery` la cual es la clase generada automaticamente por los archivos propel schema. ",
+      "line": 12
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Persistence/TrainingRepositoryInterface.php",
+      "description": "Se crea la interfaz de Repositoty, esta tendra la estructura que el TrainingRepository tendra",
+      "line": 8
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Persistence/TrainingRepository.php",
+      "description": "El Repositorio en si, este se encargara de tener los métodos que leeran de la base de dato.",
+      "line": 12
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Persistence/TrainingRepository.php",
+      "description": "Como se puede ver se usa el Factory para usar el método `createAntelopeQuery` que creara nos dara acceso a los queries disponibles para acceder a la tabla `pyz_antelope` en la BD",
+      "line": 16
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Persistence/TrainingRepository.php",
+      "description": "El método `filterByName` es un método que nos expone el `PyzAntelopeQuery` para la propiedad `name`, en este caso le pasamos el nombre el `antelopeCriteria` que recibe esta funcion",
+      "line": 18
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Persistence/TrainingRepository.php",
+      "description": "El método `findOne` obtiene un solo elemento que coincida.",
+      "line": 19
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Persistence/TrainingRepository.php",
+      "description": "Creamos la instancia de `AntelopeTransfer` para almacenar los datos que recibamos de la base de datos",
+      "line": 25
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Persistence/TrainingRepository.php",
+      "description": "Y usando el `toArray->fromArray` convertimos la Entity recibida en un Transfer Object",
+      "line": 26
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Persistence/TrainingEntityManagerInterface.php",
+      "description": "Ahora creamos el EntityManagerInterface que se encargara de especificar la estructura que el EntityManager tendra",
+      "line": 7
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Persistence/TrainingEntityManager.php",
+      "description": "El EntityManager es el responsable de guardar los Transfer Object en la base de datos.",
+      "line": 9
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Persistence/TrainingEntityManager.php",
+      "description": "Primero creamos una instancia del Entity creado por el schema file.",
+      "line": 13
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Persistence/TrainingEntityManager.php",
+      "description": "Usando el método `modifedToArray->fromArray` pasamos de Transfer Object a Entity. El método `modifiedToArray()` solo nos dara las propiedades que fueron modificadas en el Transfer Object y no todas las propiedades",
+      "line": 14
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Persistence/TrainingEntityManager.php",
+      "description": "Y guardamos el Entity en la base de datos con el método `save()`",
+      "line": 15
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Persistence/TrainingEntityManager.php",
+      "description": "Y usamos el método toArray->fromArray para pasar el Entity a Transfer Object",
+      "line": 17
+    }
+  ]
+}
