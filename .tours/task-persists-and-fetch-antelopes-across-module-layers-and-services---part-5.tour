@@ -1,0 +1,71 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Task: Persists and fetch antelopes across module layers and services - Part 5",
+  "steps": [
+    {
+      "file": "src/Pyz/Client/Training/Stub/TrainingStub.php",
+      "description": "Para llamar al BackendGateway y por consiguiente a Zed desde el Storefront se usa un Stub. Este Stub extiende de `ZedRequestStub` que ya tiene varios helpers para hacer las cosas mas faciles",
+      "line": 9
+    },
+    {
+      "file": "src/Pyz/Client/Training/Stub/TrainingStub.php",
+      "description": "De esta forma hacemos la conexion con el BackendGateway, especificamente con el metodo `findAntelopeAction()` pasandole el parametro `$antelopeCriteria`",
+      "line": 14
+    },
+    {
+      "file": "src/Pyz/Client/Training/TrainingDependencyProvider.php",
+      "description": "Ya que este modulo usara el ZedClient para el Stub, es buena practica inyectarlo desde el DependencyProvider",
+      "line": 8
+    },
+    {
+      "file": "src/Pyz/Client/Training/TrainingDependencyProvider.php",
+      "description": "Aqui agregamos el `ZedRequestClient` a le `$container`",
+      "line": 21
+    },
+    {
+      "file": "src/Pyz/Client/Training/TrainingDependencyProvider.php",
+      "description": "Y con el método `provideServiceLayerDependencies` es que se agregan todas las dependencias del modulo",
+      "line": 12
+    },
+    {
+      "file": "src/Pyz/Client/Training/TrainingDependencyProvider.php",
+      "description": "Esta constante, es la que le va a dar una identificación a esa dependencia que agregamos",
+      "line": 10
+    },
+    {
+      "file": "src/Pyz/Client/Training/TrainingDependencyProvider.php",
+      "description": "Que como se apreciar, es establecida aqui `static::CLIENT_ZED_REQUEST`",
+      "line": 21
+    },
+    {
+      "file": "src/Pyz/Client/Training/TrainingFactory.php",
+      "description": "En el Factory, se crearan las instancias de lo que necesitamos, en este caso una instancia del Stub",
+      "line": 9
+    },
+    {
+      "file": "src/Pyz/Client/Training/TrainingFactory.php",
+      "description": "Aqui obtenemos el ZedRequestClient que hemos inyectado en el DependencyProvider",
+      "line": 18
+    },
+    {
+      "file": "src/Pyz/Client/Training/TrainingFactory.php",
+      "description": "Usando la constante que creamos en el Dependecy Provider `TrainingDependencyProvider::CLIENT_ZED_REQUEST`",
+      "line": 20
+    },
+    {
+      "file": "src/Pyz/Client/Training/TrainingClientInterface.php",
+      "description": "Ahora creamos la interface para el Client para dictar las propiedades y métodos que tendra",
+      "line": 8
+    },
+    {
+      "file": "src/Pyz/Client/Training/TrainingClient.php",
+      "description": "Y creamos el Client en si",
+      "line": 12
+    },
+    {
+      "file": "src/Pyz/Client/Training/TrainingClient.php",
+      "description": "Este método usara el Factory para crear una instancia del Stub para usar el método `findAntelope` que conecta al BackendGateway",
+      "line": 14
+    }
+  ]
+}
