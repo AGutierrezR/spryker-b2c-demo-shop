@@ -20,6 +20,7 @@ use Generated\Shared\Transfer\PaymentReservationCanceledTransfer;
 use Monolog\Logger;
 use Pyz\Shared\Console\ConsoleConstants;
 use Pyz\Shared\Scheduler\SchedulerConfig;
+use Pyz\Shared\Training\TrainingConstants;
 use Pyz\Yves\ShopApplication\YvesBootstrap;
 use Pyz\Zed\Application\Communication\ZedBootstrap;
 use Pyz\Zed\Oms\OmsConfig;
@@ -191,10 +192,10 @@ $config[HttpConstants::ZED_HTTP_STRICT_TRANSPORT_SECURITY_CONFIG]
     = $config[HttpConstants::YVES_HTTP_STRICT_TRANSPORT_SECURITY_CONFIG]
     = $config[HttpConstants::GLUE_HTTP_STRICT_TRANSPORT_SECURITY_CONFIG]
     = [
-    'max_age' => 31536000,
-    'include_sub_domains' => true,
-    'preload' => true,
-];
+        'max_age' => 31536000,
+        'include_sub_domains' => true,
+        'preload' => true,
+    ];
 
 $config[CustomerConstants::CUSTOMER_SECURED_PATTERN] = '(^/login_check$|^(/en|/de)?/customer($|/)|^(/en|/de)?/wishlist($|/)|^(/en|/de)?/shopping-list($|/)|^(/en|/de)?/quote-request($|/)|^(/en|/de)?/comment($|/)|^(/en|/de)?/company(?!/register)($|/)|^(/en|/de)?/multi-cart($|/)|^(/en|/de)?/shared-cart($|/)|^(/en|/de)?/cart(?!/add)($|/)|^(/en|/de)?/checkout($|/))';
 $config[CustomerConstants::CUSTOMER_ANONYMOUS_PATTERN] = '^/.*';
@@ -648,10 +649,10 @@ $config[MessageBrokerConstants::MESSAGE_TO_CHANNEL_MAP] = [
 ];
 
 $config[MessageBrokerConstants::CHANNEL_TO_TRANSPORT_MAP] =
-$config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
-    'payment' => MessageBrokerAwsConfig::SQS_TRANSPORT,
-    'assets' => MessageBrokerAwsConfig::SQS_TRANSPORT,
-];
+    $config[MessageBrokerAwsConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
+        'payment' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+        'assets' => MessageBrokerAwsConfig::SQS_TRANSPORT,
+    ];
 
 $config[MessageBrokerAwsConstants::CHANNEL_TO_SENDER_TRANSPORT_MAP] = [
     'payment' => 'http',
@@ -677,3 +678,5 @@ $config[AppCatalogGuiConstants::OAUTH_OPTION_AUDIENCE] = 'aop-atrs';
 $config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_PAYMENT_AUTHORIZE] = OauthAuth0Config::PROVIDER_NAME;
 $config[OauthClientConstants::OAUTH_GRANT_TYPE_FOR_PAYMENT_AUTHORIZE] = OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS;
 $config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_PAYMENT_AUTHORIZE] = 'aop-app';
+
+$config[TrainingConstants::CONFIGURATION_KEY] = 'Hello world!';

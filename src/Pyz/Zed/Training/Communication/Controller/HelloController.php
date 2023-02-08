@@ -5,6 +5,9 @@ namespace Pyz\Zed\Training\Communication\Controller;
 use Generated\Shared\Transfer\AntelopeTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 
+/**
+ * @method \Pyz\Zed\Training\Communication\TrainingCommunicationFactory getFactory()
+ */
 class HelloController extends AbstractController
 {
   /**
@@ -15,8 +18,11 @@ class HelloController extends AbstractController
     $antelopeTransfer = new AntelopeTransfer();
     $antelopeTransfer->setName('Andy');
 
+    $myConfig = $this->getFactory()->getConfig()->getConfigurationKey();
+
     return $this->viewResponse([
-      'antelope' => $antelopeTransfer
+      'antelope' => $antelopeTransfer,
+      'config' => $myConfig,
     ]);
   }
 }
