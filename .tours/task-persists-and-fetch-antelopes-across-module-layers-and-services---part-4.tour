@@ -1,0 +1,26 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Task: Persists and fetch antelopes across module layers and services - Part 4",
+  "steps": [
+    {
+      "file": "src/Pyz/Zed/Training/Communication/Controller/AntelopeController.php",
+      "description": "Se crea el Controller para realizar tareas al entrar a una vista",
+      "line": 12
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Communication/Controller/AntelopeController.php",
+      "description": "Aqui creamos la acción `add` que guardara un dato en la base de dato",
+      "line": 14
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Presentation/Antelope/add.twig",
+      "description": "Al cargar esta vista, se ejecuta el método `addAction` en el `AntelopeController`",
+      "line": 5
+    },
+    {
+      "file": "src/Pyz/Zed/Training/Communication/Controller/GatewayController.php",
+      "description": "Se crea el `GatewayController` para exponer funcionalidad a un Client",
+      "line": 11
+    }
+  ]
+}
