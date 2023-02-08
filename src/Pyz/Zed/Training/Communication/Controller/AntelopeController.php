@@ -5,16 +5,17 @@ namespace Pyz\Zed\Training\Communication\Controller;
 use Generated\Shared\Transfer\AntelopeCriteriaTransfer;
 use Generated\Shared\Transfer\AntelopeTransfer;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method \Pyz\Zed\Training\Business\TrainingFacadeInterface getFacade()
  */
 class AntelopeController extends AbstractController
 {
-    public function addAction()
+    public function addAction(Request $request)
     {
         $antelopeTransfer = new AntelopeTransfer();
-        $antelopeTransfer->setName('Andy');
+        $antelopeTransfer->setName($request->query->get('name'));
 
         $antelopeResponseTransfer = $this->getFacade()
             ->findAntelope((new AntelopeCriteriaTransfer())->setName($antelopeTransfer->getName()));

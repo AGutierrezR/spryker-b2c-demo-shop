@@ -10,19 +10,27 @@ use SprykerShop\Yves\ShopApplication\Controller\AbstractController;
  */
 class AntelopeController extends AbstractController
 {
-  public function getAction(string $name)
-  {
-    $antelopeCriteriaTransfer = new AntelopeCriteriaTransfer();
-    $antelopeCriteriaTransfer->setName($name);
+    public function getAction(string $name)
+    {
+        $antelopeCriteriaTransfer = new AntelopeCriteriaTransfer();
+        $antelopeCriteriaTransfer->setName($name);
 
-    $antelopeResponseTransfer = $this->getFactory()
-      ->getTrainingClient()
-      ->findAntelope($antelopeCriteriaTransfer);
+        $antelopeResponseTransfer = $this->getFactory()
+            ->getTrainingClient()
+            ->findAntelope($antelopeCriteriaTransfer);
 
-    return $this->view(
-      ['antelope' => $antelopeResponseTransfer->getAntelope()],
-      [],
-      '@TrainingPage/views/antelope/get.twig'
-    );
-  }
+        $currentStore = $this->getFactory()
+            ->getStoreClient()
+            ->getCurrentStore();
+
+
+        return $this->view(
+            [
+                'antelope' => $antelopeResponseTransfer->getAntelope(),
+                'store' => $currentStore,
+            ],
+            [],
+            '@TrainingPage/views/antelope/get.twig'
+        );
+    }
 }
