@@ -28,6 +28,8 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
      */
     public const PYZ_NEWSLETTER_FACADE = 'newsletter facade';
 
+    public const FACADE_TRAINING = 'FACADE_TRAINING';
+
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
@@ -36,6 +38,8 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
     public function provideCommunicationLayerDependencies(Container $container)
     {
         $container = parent::provideCommunicationLayerDependencies($container);
+
+        $container = $this->addTrainingFacade($container);
 
         $container->set(static::PYZ_SALES_FACADE, function (Container $container) {
             return $container->getLocator()->sales()->facade();
@@ -47,6 +51,16 @@ class CustomerDependencyProvider extends SprykerCustomerDependencyProvider
 
         return $container;
     }
+
+    protected function addTrainingFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_TRAINING, function (Container $container) {
+            return $container->getLocator()->training()->facade();
+        });
+
+        return $container;
+    }
+
 
     /**
      * @return \Spryker\Zed\Customer\Dependency\Plugin\CustomerAnonymizerPluginInterface[]
