@@ -1,0 +1,156 @@
+{
+    "$schema": "https://aka.ms/codetour-schema",
+    "title": "Hands on Import Data",
+    "steps": [
+        {
+            "file": "src/Pyz/Zed/Training/Persistence/Propel/Schema/pyz_antelope.schema.xml",
+            "description": "Se ha agregado nuevo campo `color`.\n\nLuego de esto usamos el comando `console propel:install`",
+            "line": 10
+        },
+        {
+            "file": "data/import/local/common/antelope.csv",
+            "description": "Se crea este archivo `.csv` para darle los datos que poblar la base de datos, las columnas sera `name` y `color` y en las lineas consecuentes, se colocan los datos",
+            "line": 1
+        },
+        {
+            "file": "data/import/local/full_EU.yml",
+            "description": "En este archivo se establece que la `data_entity` con el nombre `antelope`, usara los datos del `source` que es `data/import/local/common/antelope.csv` que acabamos de crear\n\nEl `data_entity` lo vamos a usar en el `AntelopeDataImporterConfig.php` que crearemos acontinuacion.",
+            "line": 193
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/AntelopeDataImportConfig.php",
+            "description": "Se crea este archivo Config, el cual extiende de `DataImportConfig` y tiene como propiedad una constante que tiene como valor el nombre del `data_entity` en este caso `antelope`",
+            "line": 7
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Business/DataSet/AntelopeDataSetInterface.php",
+            "description": "Aparte del Config, En este `DataSetInterface` tenemos que indicar las columnas que tiene el `antelope.csv`, en este caso `name` y `color`",
+            "line": 5
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Business/DataImportStep/AntelopeWriterStep.php",
+            "description": "En esta clase `WriterStep` se escribe la logica de negocio que se usara para usar el dataset para crear o actualizar records en la base de datos\n\nEsta clase implemente `DataImportSteapInterface`",
+            "line": 10
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Business/DataImportStep/AntelopeWriterStep.php",
+            "description": "Usamos el `Query` que nos ha creado Propel y buscamos por nombre con `filterByName()` pasando el valor de `COLUMN_NAME` del dataset (se usa la interfaz para evitar el magic string). Luego se usa `findOneOrCreate()` para que si existe nos lo guarde en la variable `$antelopeEntity` y si no existe lo cree pero no lo guarda en la base de datos todavia.",
+            "line": 14
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Business/DataImportStep/AntelopeWriterStep.php",
+            "description": "Se le agrega la propiedad `color` ",
+            "line": 18
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Business/DataImportStep/AntelopeWriterStep.php",
+            "description": "Y se guarda si el dato es nuevo o es modificado.",
+            "line": 21
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Business/AntelopeDataImportBusinessFactory.php",
+            "description": "Ahora se crea un Factory para instanciar el WritersStep y el DataImporter, esta clase extiende la funcionalidad de `DataImportBusinessFactory`\n\nComo con todos los service models, usamos el Factory para instanciar nuestras clases.",
+            "line": 9
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Business/AntelopeDataImportBusinessFactory.php",
+            "description": "Creamos el metodo que instanciara la clase WriterStep",
+            "line": 31
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Business/AntelopeDataImportBusinessFactory.php",
+            "description": "Y creamos el metodo que instanciara el DataImporter.\n\nEste metodo recibe un Transfer del Data Importer Configuration.",
+            "line": 16
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Business/AntelopeDataImportBusinessFactory.php",
+            "description": "Recuperamos el CSV DataImporter",
+            "line": 18
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Business/AntelopeDataImportBusinessFactory.php",
+            "description": "Creamos el Data Set Step Broker",
+            "line": 20
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Business/AntelopeDataImportBusinessFactory.php",
+            "description": "Agregamos los pasos del WriterStep en el Data Set Step Broker",
+            "line": 21
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Business/AntelopeDataImportBusinessFactory.php",
+            "description": "Agregamos el Data Set Step Broker en el Data Importer",
+            "line": 23
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Business/AntelopeDataImportBusinessFactory.php",
+            "description": "Y devolvemos el Data Importer configurado",
+            "line": 25
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/AntelopeDataImportDependencyProvider.php",
+            "description": "Dado que el BusinessFactory esta extendiendo de `DataImporterBusinessFactory` que usa las dependencias proporcionadas, necesitamos que estas dependencias también estén disponibles en nuestro módulo para que el localizador de Spryker pueda encontrarlas.\n\nPara esto se crea un DependencyProvider vacio que extienda `DataImportDependencyProvider`.\n",
+            "line": 7
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Business/AntelopeDataImportFacadeInterface.php",
+            "description": "Un punto importante es esta anotacion `@api` ya que esta le indica a los desarrolladores que es lo que ofrece esta Facade.",
+            "line": 14
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Business/AntelopeDataImportFacade.php",
+            "description": "Ahora creamos el `*Facade` que extiende de `AbstractFacade` e implementa la interfaz que acabamos de crear.\n\nComo en todos los casos, el Facade usa el `*Factory` para instanciar las clases con la logica de negocio y sus metodos.",
+            "line": 12
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Business/AntelopeDataImportFacade.php",
+            "description": "Para evitar los errores de sintaxis que indica el IDE se escribe este comentario que indica que el metodo `getFactory` usa al BusinessFactory de este modulo",
+            "line": 10
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Business/AntelopeDataImportFacade.php",
+            "description": "Usando el Factory se crea un DataImport el cual tiene el método `import`.\n\nHasta aca la logica esta lista. Ya seremos capaces de importar data de un csv a la base de datos usando este Facade",
+            "line": 27
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Communication/Plugin/DataImport/AntelopeDataImportPlugin.php",
+            "description": "Para poder Pluginizar este Data Import usandolo desde la linea de comandos con el comando `console data:import` debemos crear un `*DataImportPlugin`",
+            "line": 1
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Communication/Plugin/DataImport/AntelopeDataImportPlugin.php",
+            "description": "Creamos esta clase que extieende de `AbstractPlugin` e implementa `DataImportPluginInterface`",
+            "line": 14
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Communication/Plugin/DataImport/AntelopeDataImportPlugin.php",
+            "description": "Este método es donde vamos a indicar el Import Type, el cual debe ser el mismo que se especifico en el `full_EU.yml` y se guardo en la variable `IMPORT_TYPE_ANTELOPE` del Config.",
+            "line": 21
+        },
+        {
+            "file": "src/Pyz/Zed/AntelopeDataImport/Communication/Plugin/DataImport/AntelopeDataImportPlugin.php",
+            "description": "En este método se usar el Facade para tener acceso al méotod `importAntelope`",
+            "line": 18
+        },
+        {
+            "file": "src/Pyz/Zed/DataImport/DataImportDependencyProvider.php",
+            "description": "Ya que tenemos el Plugin listo para ser usado, lo agregamos a el `DataImportDependencyProvider`",
+            "line": 10
+        },
+        {
+            "file": "src/Pyz/Zed/DataImport/DataImportDependencyProvider.php",
+            "description": "Y lo anexamos en el Array de del metodo `getDataImporterPlugins()`. Con esto ya podremos ejecutar el comando `console data:import antelope` y se ejecutar el `AntelopeDataImportPlugin()`",
+            "line": 257
+        },
+        {
+            "file": "src/Pyz/Zed/Console/ConsoleDependencyProvider.php",
+            "description": "Para hacer uso de el comando de la forma `console data:import:antelope` debemos agregarlo al `ConsoleDepedencyProvider`",
+            "line": 10
+        },
+        {
+            "file": "src/Pyz/Zed/Console/ConsoleDependencyProvider.php",
+            "description": "Y lo agregamos al `DataImportConsole`",
+            "line": 273
+        }
+    ]
+}
