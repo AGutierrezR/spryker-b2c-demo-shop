@@ -1,0 +1,136 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Hands-on Back Office - Part 1",
+  "steps": [
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Table/AntelopeTable.php",
+      "description": "Para crear una tabla en el Back Office, se necesita crear una clase Table que extienda de `AbstractTable` el cual proporciona funcionalidad. Existen dos metodos que tenemos que personalizar `configure` y `prepareData`",
+      "line": 11
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Table/AntelopeTable.php",
+      "description": "Declaramos constantes para cada una las propiedades de la entidad que va a llenar la tabla, estos nombres deben coincidir con los nombres que se establecieron en el `*.schema.xml`",
+      "line": 13
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Table/AntelopeTable.php",
+      "description": "Esta variable va a almacenar la instancia del Query, esta instancia se enviar por medio del `constructor`",
+      "line": 17
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Table/AntelopeTable.php",
+      "description": "Aqui inicializamos el Query",
+      "line": 21
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Table/AntelopeTable.php",
+      "description": "En `configure`, vamos a establecer la configuración de la tabla: Columnas, Sortables, Searchables, etc. Estas configuraciones deben ser revueltas por la funcion",
+      "line": 29
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Table/AntelopeTable.php",
+      "description": "En `prepareData()` es donde se va a preparar el Query y se va a manejar los datos que son recuperados.",
+      "line": 56
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Table/AntelopeTable.php",
+      "description": "Aqui ejecutamos el query con el Query y la `$config` que configuramos en `configure()`",
+      "line": 58
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Table/AntelopeTable.php",
+      "description": "Si no ha nada en la coleccion, devolvemos un array vacio",
+      "line": 64
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Table/AntelopeTable.php",
+      "description": "Si hay, enviamos la coleccion mapeada",
+      "line": 68
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Table/AntelopeTable.php",
+      "description": "Este metodo cambia cada Entity a un Array de Objectos cuyas propiedades son las propiedades de cada Entity, Spryker se encargara de organizar todo lo demas",
+      "line": 76
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/AntelopeGuiDependencyProvider.php",
+      "description": "Ya que hacemos uso de `PyzAntelopeQuery` en nuestro modulo, debemos especificarlos dentro de `*DependencyProvider`. Esto es necesario solo si lo usamos fuera de la capa de persistencia, como Tables y DataImport, o cuando necesitamos un query de otro modulo.",
+      "line": 9
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/AntelopeGuiDependencyProvider.php",
+      "description": "Un detalle diferentes es que tenemos este `$container->factory()` qu lo que haces es asegurarse que tenemos una nueva instancia de `PyzAntelopeQuery` cada vez que hagamos una petición para el servicio.",
+      "line": 24
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/AntelopeGuiCommunicationFactory.php",
+      "description": "Ahora con el Factory, inicializamos el `*Table`",
+      "line": 10
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/AntelopeGuiCommunicationFactory.php",
+      "description": "Usamos el `getProvidedDependency()` para obtener lo que necesitamos del `DependencyProvider`",
+      "line": 21
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/AntelopeGuiCommunicationFactory.php",
+      "description": "Y con este método creamos la instancia de `*Table` pasanle el Query",
+      "line": 12
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Controller/IndexController.php",
+      "description": "Crearemos el Controller para la pagina que mostrara la tabla",
+      "line": 10
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Controller/IndexController.php",
+      "description": "Usaremos el factory para obtener la tabla con los datos",
+      "line": 14
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Controller/IndexController.php",
+      "description": "Enviamos la tabla en el `viewResponse`, nota que usamos `$table->rende]()` para enviar la tabla, esto enviara un \"HTML\" de la tabla",
+      "line": 18
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Controller/IndexController.php",
+      "description": "Este método es para hacer el fetch de los datos de la tabla.\n\nLa tabla al ser renderizada posee un atributo `data-ajax=\"/antelope-gui/index/table\"` que hara una petición a este mismo controlador, pero a la accion `table`",
+      "line": 22
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Controller/IndexController.php",
+      "description": "Vuelve a crear la tabla pero en este caso para tener acceso al metodo `fetchDada()`",
+      "line": 24
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Controller/IndexController.php",
+      "description": "Aqui retornamos el resultado de `fetchData()` como json con `jsonResponse()`",
+      "line": 27
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Presentation/Index/index.twig",
+      "description": "Se crea el template para mostrar la tabla.",
+      "line": 1
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Presentation/Index/index.twig",
+      "description": "Se establece el titulo en uan variable `widget_title`",
+      "line": 3
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Presentation/Index/index.twig",
+      "description": "Tanto el `head_title` como el `section_title` tendra como valor el `widget_title`",
+      "line": 5
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Presentation/Index/index.twig",
+      "description": "En el bloque `content` se usa el `@Gui/Partials/widget.twig`",
+      "line": 9
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Presentation/Index/index.twig",
+      "description": "Dentro de el hay un `widget_content` donde vamos a mostrar la tabla, esta se muestra usando el pipe `raw`",
+      "line": 11
+    }
+  ]
+}

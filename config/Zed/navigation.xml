@@ -13,6 +13,14 @@
                 <action>index</action>
                 <visible>1</visible>
             </hello-antelopes>
+            <antelopes-list>
+                <label>Antelope List</label>
+                <title>Antelope List</title>
+                <bundle>antelope-gui</bundle>
+                <controller>index</controller>
+                <action>index</action>
+                <visible>1</visible>
+            </antelopes-list>
         </pages>
     </hello-world>
     <!-- You can control navigation order here and add your custom navigation entries -->
