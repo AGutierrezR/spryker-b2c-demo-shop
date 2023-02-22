@@ -1,0 +1,151 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Hands-on Back Office - Part 2",
+  "steps": [
+    {
+      "file": "src/Pyz/Shared/Training/Transfer/antelope.transfer.xml",
+      "description": "Agrega la propiedad color al Transfer",
+      "line": 9
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Form/AntelopeCreateForm.php",
+      "description": "Un formulario para el Back Office debe extender el `AbstractType` el cual proporciona información basica del formulario y ofrece algunas funciones utiles como acceder al factory del modulo. \n\nEl método principal es `buildForm()` donde se van a agregar todos los elementos del formulario.",
+      "line": 10
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Form/AntelopeCreateForm.php",
+      "description": "Para evitar el Magic string, se deja los nombres de los campos, estos deben coincider con las propiedades del Transfer",
+      "line": 12
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Form/AntelopeCreateForm.php",
+      "description": "Este metodo va a agregar el campo `name` usando el builder",
+      "line": 26
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Form/AntelopeCreateForm.php",
+      "description": "Se usa el metodo `add` del `builder`, como primer parametro se pasa el nombre del campo, segunda parametro es el tipo de campo que sera (en este caso es `TextType`), y de tercer parametro se pueden pasar algunas opciones",
+      "line": 28
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Form/AntelopeCreateForm.php",
+      "description": "`label` es el nombre que tendra el Label del campo, si no se especifica usara el nombre de la propiedad con Caps",
+      "line": 29
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Form/AntelopeCreateForm.php",
+      "description": "`constraints` se encarga de las validaciones del campo ",
+      "line": 30
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Form/AntelopeCreateForm.php",
+      "description": "Este metodo agrega el campo color al formulario",
+      "line": 38
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Form/AntelopeCreateForm.php",
+      "description": "Solo se espeficica `constraints` por lo que el labels sera 'Color'",
+      "line": 41
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Form/AntelopeCreateForm.php",
+      "description": "En el metodo `buildForm` se agregan los campos al `builder` usando los metodos que creamos anteriormente.",
+      "line": 20
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/AntelopeGuiDependencyProvider.php",
+      "description": "Ya que en el formulario crearemos Antelopes, y esta funcionalidad la tenemos en el modulo Training, debemos inyectar ese modulo dentro de este modulo",
+      "line": 24
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/AntelopeGuiDependencyProvider.php",
+      "description": "Usando el `getLocator()` buscamos el modulo Training y accedermos al Facade de este",
+      "line": 27
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/AntelopeGuiDependencyProvider.php",
+      "description": "Y lo agregamos al `$container`",
+      "line": 18
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/AntelopeGuiCommunicationFactory.php",
+      "description": "Este metodo usa el `getFormFactory` que es parte de `AbstractCommunicationFactory` para crear una instancia del formulario",
+      "line": 23
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/AntelopeGuiCommunicationFactory.php",
+      "description": "Al metodo `create()` se le pasa como primer parametro la clase que crear el formulario (`AntelopeCreateForm`), como segundo parametro el Transfer que va a ser populado con la información del formulario, y como tercer parametro las opciones adicionales",
+      "line": 25
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/AntelopeGuiCommunicationFactory.php",
+      "description": "Con este método obtenemos las instancia del Facade del modulo Training",
+      "line": 28
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Controller/CreateController.php",
+      "description": "Momento de poner las ultimas piezas juntas, crearemos un Controller para que sirva a la pagina `create/` y muestre el formulario",
+      "line": 14
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Controller/CreateController.php",
+      "description": "Primero craeremos el formulario por medio de Factory, y le pasamos el Transfer.\n\nEl metodo `handleRequest` sirve para recibir el `$request` y ver si este a sido un submit, y de ser asi, si es valido",
+      "line": 22
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Controller/CreateController.php",
+      "description": "En el caso de que el formulario este submitted y este tenga todos su datos correctos, se creara un record en la base de datos",
+      "line": 27
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Controller/CreateController.php",
+      "description": "De lo contrario, se enviara el viewResponse con el formulario, y el link para regresar a la lista",
+      "line": 31
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Controller/CreateController.php",
+      "description": "Este método genera el link para volver a la lista, link que genera con el string que colocamos en el `URL_ANTELOPE_OVERVIEW`",
+      "line": 51
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Controller/CreateController.php",
+      "description": "En el caso de la creación, usamos el Facada del modulo Training para crear el record",
+      "line": 37
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Controller/CreateController.php",
+      "description": "Creamos un mensaje de Success con el string que establecimos en `MESSAGE_ANTELOPE_CREATED_SUCCESS`",
+      "line": 46
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Communication/Controller/CreateController.php",
+      "description": "Y hacemos un redirect a el URL que generamos en `getAntelopeOverviewUrl`\n\nNOTA: El mensaje de success se llevara en la redirección, por lo que se mostrara el mensaje en la pagina a la que nos redirigimos",
+      "line": 48
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Presentation/Create/index.twig",
+      "description": "En el bloque `action` podemos usa la funcion `backActionButton()` que recibe el URL y un texto que mostrara en el boton",
+      "line": 6
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Presentation/Create/index.twig",
+      "description": "La funcion `form_start()` se encarga de renderizar el comiezo de la etiqueta de un formulario. Se encarga de colocar los metodos de configuración y el target del formulario",
+      "line": 12
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Presentation/Create/index.twig",
+      "description": "La funcion `form_row()` renderiza las filas de un campo, lo que es una combinacion del label, errors, help y widgets",
+      "line": 15
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Presentation/Create/index.twig",
+      "description": "Y `form_end` se encarga de cerrar la etiqueta de el formulario",
+      "line": 20
+    },
+    {
+      "file": "src/Pyz/Zed/AntelopeGui/Presentation/Index/index.twig",
+      "description": "Agregamos un boton de Create Action para que nos lleve a la pagina de creación",
+      "line": 10
+    }
+  ]
+}

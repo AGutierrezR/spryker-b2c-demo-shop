@@ -2,6 +2,10 @@
 
 namespace Pyz\Zed\AntelopeGui\Communication;
 
+use Generated\Shared\Transfer\AntelopeTransfer;
+use Pyz\Zed\Training\Business\TrainingFacadeInterface;
+use Pyz\Zed\AntelopeGui\Communication\Form\AntelopeCreateForm;
+use Symfony\Component\Form\FormInterface;
 use Orm\Zed\Antelope\Persistence\PyzAntelopeQuery;
 use Pyz\Zed\AntelopeGui\AntelopeGuiDependencyProvider;
 use Pyz\Zed\AntelopeGui\Communication\Table\AntelopeTable;
@@ -14,6 +18,16 @@ class AntelopeGuiCommunicationFactory extends AbstractCommunicationFactory
         return new AntelopeTable(
             $this->getAntelopePropelQuery()
         );
+    }
+
+    public function createAntelopeCreateForm(AntelopeTransfer $antelopeTransfer, array $options = []): FormInterface
+    {
+        return $this->getFormFactory()->create(AntelopeCreateForm::class, $antelopeTransfer, $options);
+    }
+
+    public function getAntelopeFacade(): TrainingFacadeInterface
+    {
+        return $this->getProvidedDependency(AntelopeGuiDependencyProvider::FACADE_ANTELOPE);
     }
 
     public function getAntelopePropelQuery(): PyzAntelopeQuery

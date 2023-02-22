@@ -5,10 +5,15 @@
 {% block head_title widget_title | trans %}
 {% block section_title widget_title | trans %}
 
+
+{% block action %}
+	{{ createActionButton('/antelope-gui/create', 'Create Antelope' | trans) }}
+{% endblock %}
+
 {% block content %}
-    {% embed '@Gui/Partials/widget.twig' %}
-        {% block widget_content %}
-            {{ antelopeTable | raw }}
-        {% endblock %}
-    {% endembed %}
+	{% embed '@Gui/Partials/widget.twig' %}
+		{% block widget_content %}
+			{{ antelopeTable | raw }}
+		{% endblock %}
+	{% endembed %}
 {% endblock %}

@@ -8,13 +8,24 @@ use Spryker\Zed\Kernel\Container;
 
 class AntelopeGuiDependencyProvider extends AbstractBundleDependencyProvider
 {
+    public const FACADE_ANTELOPE = 'FACADE_ANTELOPE';
     public const PROPEL_QUERY_ANTELOPE = 'PROPEL_QUERY_ANTELOPE';
 
     public function provideCommunicationLayerDependencies(Container $container): Container
     {
         $container = parent::provideCommunicationLayerDependencies($container);
 
+        $container = $this->addAntelopeFacade($container);
         $container = $this->addAntelopePropelQuery($container);
+
+        return $container;
+    }
+
+    protected function addAntelopeFacade(Container $container)
+    {
+        $container->set(static::FACADE_ANTELOPE, function (Container $container) {
+            return $container->getLocator()->training()->facade();
+        });
 
         return $container;
     }
