@@ -1,0 +1,51 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Task: Hello World Page in Back Office",
+  "steps": [
+    {
+      "file": "config/Zed/navigation.xml",
+      "description": "Se crea una etiqueta aleatoria, puede ser totalmente custom",
+      "line": 3
+    },
+    {
+      "file": "config/Zed/navigation.xml",
+      "description": "Este es el nombre que aparece en el Back Office",
+      "line": 4
+    },
+    {
+      "file": "config/Zed/navigation.xml",
+      "description": "El bundle es el nombre del modulo al que este item apunta",
+      "line": 6
+    },
+    {
+      "file": "config/Zed/navigation.xml",
+      "description": "En `pages` es donde se indica cada una de las subpages del modulo",
+      "line": 7
+    },
+    {
+      "file": "config/Zed/navigation.xml",
+      "description": "Para este se crea una etiqueta on-the-fly, es igual que la anterior, custom",
+      "line": 8
+    },
+    {
+      "file": "config/Zed/navigation.xml",
+      "description": "Esta es el texto que aparecera en el menu",
+      "line": 9
+    },
+    {
+      "file": "config/Zed/navigation.xml",
+      "description": "El bundle de nuevo",
+      "line": 11
+    },
+    {
+      "file": "config/Zed/navigation.xml",
+      "description": "El controller que usara esta vista",
+      "line": 12
+    },
+    {
+      "file": "config/Zed/navigation.xml",
+      "description": "Y la action que usar al vista",
+      "line": 13
+    }
+  ]
+}
